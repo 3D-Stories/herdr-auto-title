@@ -7,8 +7,8 @@ import (
 )
 
 // TabPaneIDs prefixes every tab title with the Herdr ID of the pane the tab is
-// named after, so the pane a script or another agent should address is in the
-// tab bar. It wraps a resolver for the reason Numbered does.
+// named after, as "w1:p2 · ", so the pane a script or another agent should
+// address is in the tab bar. It wraps a resolver for the reason Numbered does.
 type TabPaneIDs struct {
 	inner TitleResolver
 	// maxLength is the bound inner was built with; the ID is counted against
@@ -44,7 +44,7 @@ func (p *TabPaneIDs) Resolve(tab state.TabState) Decision {
 
 	// A tab read before any of its panes has no pane to name.
 	if tab.Context != nil {
-		named, kept := fitPrefix("["+tab.Context.ID+"] "+position, decision.Name, p.maxLength)
+		named, kept := fitPrefix(tab.Context.ID+positionMark+position, decision.Name, p.maxLength)
 		if kept {
 			decision.Name = named
 

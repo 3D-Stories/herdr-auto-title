@@ -677,16 +677,20 @@ the ID is noise to anyone not addressing panes by hand.
 ## The tab's pane ID leads the position
 
 `HERDR_AUTO_TITLE_TAB_PANE_ID=true` puts the same handle in front of a tab's
-title: `[w1:p2] 3 · dashboard › nvim`. The pane is the tab's context pane, the
+title: `w1:p2 · 3 · dashboard › nvim`. The pane is the tab's context pane, the
 one the title describes, so a tab bar or a sidebar that shows only tab titles
 still says which pane to address.
 
 It is a third decorator, `TabPaneIDs` (`internal/resolver/tab_pane_id.go`), and
 it replaces `Numbered` rather than wrapping it. Each decorator only drops its
 prefix when nothing of the name would be left, and the name `Numbered` hands on
-already starts with the position: stacked, a narrow title becomes `[w1:p2] 3 ·`
+already starts with the position: stacked, a narrow title becomes `w1:p2 · 3 ·`
 with no name at all. Fitted as one prefix, the ID goes first when there is no
 room for both, then the position, and the name stays.
+
+The ID is marked off with `·`, as the position is, rather than the pane label's
+brackets: a tab bar is read left to right as a run of prefixes, and with the
+position turned off the title reads `w1:p2 · dashboard › nvim`.
 
 Two things follow from naming the context pane:
 

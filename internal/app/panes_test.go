@@ -299,13 +299,13 @@ func TestTheSettingsThatShapeATitleShapeAPaneLabel(t *testing.T) {
 			"the tab pane ID leads the tab and not the pane",
 			func(c *Config) { c.ShowTabPaneID = true },
 			"billing › claude",
-			"[wE:p1] dashboard",
+			"wE:p1 · dashboard",
 		},
 		{
 			"the tab pane ID goes in front of the position",
 			func(c *Config) { c.ShowTabPaneID, c.ShowPosition = true, true },
 			"billing › claude",
-			"[wE:p1] 1 · dashboard",
+			"wE:p1 · 1 · dashboard",
 		},
 	}
 

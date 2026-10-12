@@ -57,7 +57,7 @@ func TestMovingFocusRetitlesTheTabWithTheNewPaneID(t *testing.T) {
 	moveFocus(h, "wE:p1", 3)
 	h.poll()
 
-	want := []string{"[wE:p1] dashboard", "[wE:p2] dashboard", "[wE:p1] dashboard"}
+	want := []string{"wE:p1 · dashboard", "wE:p2 · dashboard", "wE:p1 · dashboard"}
 
 	renames := h.client.Renames()
 	if len(renames) != len(want) {
