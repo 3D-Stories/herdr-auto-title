@@ -258,7 +258,7 @@ func TestTheSettingsThatShapeATitleShapeAPaneLabel(t *testing.T) {
 
 	// A pane is named by the chain that names tabs, so everything the user has
 	// tuned about a title holds for a pane too. The position and the pane ID
-	// are the exceptions, and the last two cases state which way round each goes.
+	// are the exceptions, and the last four cases state which way round each goes.
 	tests := []struct {
 		name     string
 		tune     func(*Config)
@@ -294,6 +294,18 @@ func TestTheSettingsThatShapeATitleShapeAPaneLabel(t *testing.T) {
 			func(c *Config) { c.ShowPaneID = true },
 			"[wE:p2] billing › claude",
 			"dashboard",
+		},
+		{
+			"the tab pane ID leads the tab and not the pane",
+			func(c *Config) { c.ShowTabPaneID = true },
+			"billing › claude",
+			"[wE:p1] dashboard",
+		},
+		{
+			"the tab pane ID goes in front of the position",
+			func(c *Config) { c.ShowTabPaneID, c.ShowPosition = true, true },
+			"billing › claude",
+			"[wE:p1] 1 · dashboard",
 		},
 	}
 

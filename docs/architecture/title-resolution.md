@@ -673,3 +673,27 @@ leads, it is counted against `MaxLength`, and where nothing would be left of the
 name the ID goes and the name stays. The brackets rather than `·` keep it from
 reading as a tab position when the goto panel lists both. It is off by default:
 the ID is noise to anyone not addressing panes by hand.
+
+## The tab's pane ID leads the position
+
+`HERDR_AUTO_TITLE_TAB_PANE_ID=true` puts the same handle in front of a tab's
+title: `[w1:p2] 3 · dashboard › nvim`. The pane is the tab's context pane, the
+one the title describes, so a tab bar or a sidebar that shows only tab titles
+still says which pane to address.
+
+It is a third decorator, `TabPaneIDs` (`internal/resolver/tab_pane_id.go`), and
+it replaces `Numbered` rather than wrapping it. Each decorator only drops its
+prefix when nothing of the name would be left, and the name `Numbered` hands on
+already starts with the position: stacked, a narrow title becomes `[w1:p2] 3 ·`
+with no name at all. Fitted as one prefix, the ID goes first when there is no
+room for both, then the position, and the name stays.
+
+Two things follow from naming the context pane:
+
+- **It moves with the context.** In a split tab the context pane changes when
+  focus does, and so does the ID. `HERDR_AUTO_TITLE_PREFER_AGENT=true` keeps it
+  on the agent pane.
+- **A tab with no panes gets no ID.** There is no context pane to name, so the
+  title is the one `Numbered` would give.
+
+It is off by default for the reason the pane ID is.
