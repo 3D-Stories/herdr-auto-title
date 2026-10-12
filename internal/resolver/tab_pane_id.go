@@ -44,8 +44,8 @@ func (p *TabPaneIDs) Resolve(tab state.TabState) Decision {
 
 	// A tab read before any of its panes has no pane to name.
 	if tab.Context != nil {
-		named := withPrefix("["+tab.Context.ID+"] "+position, decision.Name, p.maxLength)
-		if named != decision.Name {
+		named, kept := fitPrefix("["+tab.Context.ID+"] "+position, decision.Name, p.maxLength)
+		if kept {
 			decision.Name = named
 
 			return decision

@@ -140,3 +140,27 @@ func TestATabPaneIDWithNoRoomLeavesThePosition(t *testing.T) {
 		t.Errorf("name = %q, want %q", got.Name, "2 · dashboar")
 	}
 }
+
+// A name that repeats the prefix it is about to get must still get it: telling a
+// kept prefix from a dropped one by comparing names would take one for the other.
+func TestATabPaneIDIsKeptWhenTheNameRepeatsIt(t *testing.T) {
+	t.Parallel()
+
+	inner := fixedResolver{decision: Decision{Name: "[wE:p1] 2 · [wE:p1]"}}
+
+	got := NewTabPaneIDs(inner, 19, true).Resolve(atPosition(2, api))
+	if got.Name != "[wE:p1] 2 · [wE:p1]" {
+		t.Errorf("name = %q, want %q", got.Name, "[wE:p1] 2 · [wE:p1]")
+	}
+}
+
+func TestATabWithNoPanesAndNoPositionKeepsItsName(t *testing.T) {
+	t.Parallel()
+
+	want := defaultChain().Resolve(tabOf(nil)).Name
+
+	got := NewTabPaneIDs(defaultChain(), DefaultMaxLength, false).Resolve(tabOf(nil))
+	if got.Name != want {
+		t.Errorf("name = %q, want %q", got.Name, want)
+	}
+}

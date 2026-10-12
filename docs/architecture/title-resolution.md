@@ -694,6 +694,6 @@ Two things follow from naming the context pane:
   focus does, and so does the ID. `HERDR_AUTO_TITLE_PREFER_AGENT=true` keeps it
   on the agent pane.
 - **A tab with no panes gets no ID.** There is no context pane to name, so the
-  title is the one `Numbered` would give.
+  title keeps its position when that is shown and is otherwise left as it is.
 
 It is off by default for the reason the pane ID is.

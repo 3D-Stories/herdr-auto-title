@@ -91,10 +91,9 @@ func New(
 	}
 }
 
-// Resolvers builds what the configuration asks titles to be resolved by: the
-// shipped chain, its pane's ID and its position in front when asked, panes named
-// unless that is turned off and their IDs in front when asked, and topics
-// reported unless that is turned off.
+// Resolvers builds the shipped chain with whatever the configuration puts in
+// front of a tab title, the pane resolver unless panes are not named, and the
+// topics unless they are not reported.
 func Resolvers(
 	cfg Config,
 ) (resolver.TitleResolver, resolver.PaneResolver, *resolver.Topics) {
